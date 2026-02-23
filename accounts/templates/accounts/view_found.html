@@ -1,0 +1,1062 @@
+{% extends "accounts/base.html" %}
+{% block title %}Found Persons Database - ReuniteHub{% endblock %}
+
+{% block content %}
+<style>
+    /* Found Persons Styles */
+    :root {
+        --primary-color: #2c3e50;
+        --secondary-color: #3498db;
+        --accent-color: #e74c3c;
+        --success-color: #27ae60;
+        --warning-color: #f39c12;
+        --light-color: #f8f9fa;
+        --dark-color: #2c3e50;
+        --text-color: #34495e;
+        --text-light: #7f8c8d;
+        --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.12);
+        --transition: all 0.3s ease;
+        --border-radius: 12px;
+    }
+
+    .found-persons-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem;
+        animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Page Header */
+    .page-header {
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+
+    .page-header h1 {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        font-weight: 700;
+        position: relative;
+        display: inline-block;
+    }
+
+    .page-header h1::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--success-color), #2ecc71);
+        border-radius: 2px;
+    }
+
+    .page-header p {
+        color: var(--text-light);
+        font-size: 1.1rem;
+        line-height: 1.6;
+        max-width: 700px;
+        margin: 2rem auto 0;
+    }
+
+    /* Search & Filter Section */
+    .search-filter-section {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        padding: 2rem;
+        margin-bottom: 3rem;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        animation: slideDown 0.5s ease-out 0.2s both;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 1.5rem;
+    }
+
+    .section-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--success-color), #2ecc71);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.3rem;
+        box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+    }
+
+    .section-title h2 {
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        margin: 0;
+        font-weight: 600;
+    }
+
+    .search-container {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .search-input {
+        flex: 1;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        border: 2px solid #e1e5eb;
+        border-radius: var(--border-radius);
+        transition: var(--transition);
+        background: #f8f9fa;
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: var(--success-color);
+        background: white;
+        box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.15);
+    }
+
+    .search-btn {
+        padding: 1rem 2rem;
+        background: linear-gradient(135deg, var(--success-color), #2ecc71);
+        color: white;
+        border: none;
+        border-radius: var(--border-radius);
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+    }
+
+    .search-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(39, 174, 96, 0.4);
+    }
+
+    .filter-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .filter-group {
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .filter-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--primary-color);
+        font-weight: 600;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .filter-group label i {
+        color: var(--success-color);
+    }
+
+    .filter-select {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 2px solid #e1e5eb;
+        border-radius: var(--border-radius);
+        background: #f8f9fa;
+        color: var(--text-color);
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .filter-select:focus {
+        outline: none;
+        border-color: var(--success-color);
+        background: white;
+        box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.15);
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, var(--success-color), #2ecc71);
+        color: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        animation: fadeIn 0.6s ease-out 0.3s both;
+    }
+
+    .stat-item {
+        text-align: center;
+        flex: 1;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        font-weight: 500;
+    }
+
+    /* Persons Grid */
+    .persons-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+    }
+
+    /* Person Card */
+    .person-card {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        transition: var(--transition);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        position: relative;
+        animation: cardAppear 0.6s ease-out;
+        animation-fill-mode: both;
+    }
+
+    @keyframes cardAppear {
+        from {
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .person-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-hover);
+    }
+
+    .person-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background: linear-gradient(90deg, var(--success-color), #2ecc71);
+        z-index: 1;
+    }
+
+    .card-header {
+        position: relative;
+        height: 220px;
+        overflow: hidden;
+    }
+
+    .person-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+    }
+
+    .person-card:hover .person-image {
+        transform: scale(1.05);
+    }
+
+    .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4));
+        display: flex;
+        align-items: flex-end;
+        padding: 1rem;
+    }
+
+    .person-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: white;
+        background: rgba(39, 174, 96, 0.9);
+        backdrop-filter: blur(10px);
+    }
+
+    .person-id {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+
+    .card-content {
+        padding: 1.5rem;
+    }
+
+    .person-name {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .person-age {
+        background: linear-gradient(135deg, var(--success-color), #2ecc71);
+        color: white;
+        padding: 0.3rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .person-details {
+        margin-bottom: 1.2rem;
+    }
+
+    .detail-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 0.8rem;
+        color: var(--text-color);
+    }
+
+    .detail-item i {
+        color: var(--success-color);
+        width: 18px;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+
+    .detail-label {
+        font-weight: 600;
+        color: var(--primary-color);
+        min-width: 80px;
+    }
+
+    .detail-value {
+        flex: 1;
+        color: var(--text-color);
+    }
+
+    .person-description {
+        color: var(--text-light);
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1.2rem;
+        border-top: 1px solid #f0f2f5;
+    }
+
+    .report-date {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--text-light);
+        font-size: 0.85rem;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 0.8rem;
+    }
+
+    .action-btn {
+        padding: 0.6rem 1.2rem;
+        border-radius: var(--border-radius);
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.9rem;
+        border: none;
+    }
+
+    .view-btn {
+        background: var(--secondary-color);
+        color: white;
+        box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+    }
+
+    .view-btn:hover {
+        background: #2980b9;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
+    }
+
+    .report-btn {
+        background: transparent;
+        color: var(--secondary-color);
+        border: 2px solid var(--secondary-color);
+    }
+
+    .report-btn:hover {
+        background: rgba(52, 152, 219, 0.1);
+        transform: translateY(-2px);
+    }
+
+    /* Empty State */
+    .empty-state {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 4rem 2rem;
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        border: 2px dashed #e1e5eb;
+        animation: fadeIn 0.8s ease-out;
+    }
+
+    .empty-icon {
+        font-size: 4rem;
+        color: #e1e5eb;
+        margin-bottom: 1.5rem;
+    }
+
+    .empty-state h3 {
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    .empty-state p {
+        color: var(--text-light);
+        max-width: 500px;
+        margin: 0 auto 2rem;
+        line-height: 1.6;
+    }
+
+    .empty-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0.9rem 2rem;
+        font-size: 1rem;
+        font-weight: 600;
+        background: linear-gradient(135deg, var(--success-color), #2ecc71);
+        color: white;
+        border: none;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: var(--transition);
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+    }
+
+    .empty-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+    }
+
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 3rem;
+        animation: fadeIn 0.6s ease-out 0.5s both;
+    }
+
+    .page-btn {
+        width: 40px;
+        height: 40px;
+        border: 2px solid #e1e5eb;
+        background: white;
+        color: var(--text-color);
+        border-radius: var(--border-radius);
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .page-btn:hover {
+        border-color: var(--success-color);
+        color: var(--success-color);
+    }
+
+    .page-btn.active {
+        background: var(--success-color);
+        color: white;
+        border-color: var(--success-color);
+    }
+
+    .page-btn.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .page-btn.disabled:hover {
+        border-color: #e1e5eb;
+        color: var(--text-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+        .persons-grid {
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        }
+    }
+
+    @media (max-width: 992px) {
+        .found-persons-container {
+            padding: 1.5rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.2rem;
+        }
+
+        .search-container {
+            flex-direction: column;
+        }
+
+        .search-btn {
+            justify-content: center;
+        }
+
+        .stats-bar {
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .stat-item {
+            flex: 0 0 calc(50% - 1.5rem);
+        }
+
+        .persons-grid {
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .filter-controls {
+            flex-direction: column;
+        }
+
+        .filter-group {
+            min-width: 100%;
+        }
+
+        .persons-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .card-header {
+            height: 200px;
+        }
+
+        .action-buttons {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .action-btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .found-persons-container {
+            padding: 1rem;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+        }
+
+        .search-filter-section {
+            padding: 1.5rem;
+        }
+
+        .card-content {
+            padding: 1.2rem;
+        }
+
+        .person-name {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .person-age {
+            align-self: flex-start;
+        }
+
+        .detail-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+        }
+
+        .stats-bar {
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+        }
+    }
+</style>
+
+<div class="found-persons-container">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Found Persons Database</h1>
+        <p>
+            Browse through recently found persons to help identify and reunite them with their loved ones.
+            Every person found brings hope to a family.
+        </p>
+    </div>
+
+    <!-- Search & Filter Section -->
+    <div class="search-filter-section">
+        <div class="section-title">
+            <div class="section-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <h2>Search & Filter</h2>
+        </div>
+
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput"
+                placeholder="Search by name, location, or description...">
+            <button class="search-btn" id="searchBtn">
+                <i class="fas fa-search"></i>
+                Search
+            </button>
+        </div>
+    </div>
+
+    <!-- Found Persons Grid -->
+    <div class="persons-grid" id="personsGrid">
+        {% for person in found_list %}
+        <div class="person-card" data-name="{{ person.name|lower }}" data-age="{{ person.age_estimate|lower }}"
+            data-location="{{ person.found_location|lower }}" data-description="{{ person.description|lower }}">
+            <div class="card-header">
+                {% if person.photo %}
+                <img src="{{ person.photo.url }}" alt="{{ person.name|default:'Found person' }}" class="person-image">
+                {% else %}
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 220'%3E%3Crect width='400' height='220' fill='%23f0f2f5'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='20' fill='%23999' text-anchor='middle' dy='.3em'%3EPhoto Not Available%3C/text%3E%3C/svg%3E"
+                    alt="No photo available" class="person-image">
+                {% endif %}
+                <div class="image-overlay">
+                    <span class="person-status">
+                        <i class="fas fa-user-check"></i>
+                        Awaiting Identification
+                    </span>
+                </div>
+                <div class="person-id">ID: FP-{{ forloop.counter|stringformat:"04d" }}</div>
+            </div>
+
+            <div class="card-content">
+                <div class="person-name">
+                    <span>{{ person.name|default:"Unidentified Person" }}</span>
+                    {% if person.age_estimate %}
+                    <span class="person-age">{{ person.age_estimate }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="person-details">
+                    <div class="detail-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span class="detail-label">Found at:</span>
+                        <span class="detail-value">{{ person.found_location|default:"Location unknown" }}</span>
+                    </div>
+
+                </div>
+
+                {% if person.description %}
+                <p class="person-description" title="{{ person.description }}">
+                    {{ person.description|truncatechars:150 }}
+                </p>
+                {% else %}
+                <p class="person-description">
+                    No additional description provided.
+                </p>
+                {% endif %}
+
+                <div class="card-footer">
+                    <div class="report-date">
+                        <i class="far fa-clock"></i>
+                        <span>Reported {{ person.reported_at|timesince }} ago</span>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="action-btn view-btn" onclick="viewPersonDetails('{{ person.id }}')">
+                            <i class="fas fa-eye"></i>
+                            View Details
+                        </button>
+                        <button class="action-btn report-btn" onclick="reportMatch('{{ person.id }}')">
+                            <i class="fas fa-heart"></i>
+                            Report Match
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="empty-state">
+            <div class="empty-icon">
+                <i class="fas fa-search-plus"></i>
+            </div>
+            <h3>No Found Persons Yet</h3>
+            <p>No found persons have been reported yet. Be the first to help reunite someone with their family.</p>
+            <button class="empty-btn" onclick="location.href='{% url 'report_found' %}'">
+                <i class="fas fa-plus"></i>
+                Report Found Person
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if page_obj and page_obj.paginator.num_pages > 1 %}
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+        <a class="page-btn" href="?page={{ page_obj.previous_page_number }}">
+            <i class="fas fa-chevron-left"></i>
+        </a>
+        {% else %}
+        <span class="page-btn disabled">
+            <i class="fas fa-chevron-left"></i>
+        </span>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+        {% if num == page_obj.number %}
+        <span class="page-btn active">{{ num }}</span>
+        {% else %}
+        <a class="page-btn" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        <a class="page-btn" href="?page={{ page_obj.next_page_number }}">
+            <i class="fas fa-chevron-right"></i>
+        </a>
+        {% else %}
+        <span class="page-btn disabled">
+            <i class="fas fa-chevron-right"></i>
+        </span>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Initialize stats
+        updateStats();
+
+        // Filter functionality
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const ageFilter = document.getElementById('ageFilter');
+        const locationFilter = document.getElementById('locationFilter');
+        const dateFilter = document.getElementById('dateFilter');
+        const sortBy = document.getElementById('sortBy');
+        const personCards = document.querySelectorAll('.person-card');
+
+        // Search functionality
+        searchBtn.addEventListener('click', filterPersons);
+        searchInput.addEventListener('input', filterPersons);
+
+        // Filter change handlers
+        [ageFilter, locationFilter, dateFilter, sortBy].forEach(filter => {
+            filter.addEventListener('change', filterPersons);
+        });
+
+        function filterPersons() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const ageValue = ageFilter.value;
+            const locationValue = locationFilter.value;
+            const dateValue = dateFilter.value;
+            const sortValue = sortBy.value;
+
+            personCards.forEach(card => {
+                let visible = true;
+
+                // Search term filtering
+                if (searchTerm) {
+                    const name = card.dataset.name || '';
+                    const location = card.dataset.location || '';
+                    const description = card.dataset.description || '';
+
+                    if (!name.includes(searchTerm) &&
+                        !location.includes(searchTerm) &&
+                        !description.includes(searchTerm)) {
+                        visible = false;
+                    }
+                }
+
+                // Age filtering
+                if (ageValue && visible) {
+                    const ageText = card.querySelector('.person-age')?.textContent?.toLowerCase() || '';
+                    if (ageValue === 'unknown' && ageText) visible = false;
+                    if (ageValue !== 'unknown' && !ageText.includes(ageValue)) visible = false;
+                }
+
+                // Apply visibility
+                card.style.display = visible ? 'block' : 'none';
+
+                // Add animation for appearing cards
+                if (visible) {
+                    card.style.animation = 'none';
+                    card.offsetHeight; // Trigger reflow
+                    card.style.animation = `cardAppear 0.5s ease-out`;
+                }
+            });
+
+            // Update stats after filtering
+            updateStats();
+
+            // Check if no cards visible
+            const visibleCards = document.querySelectorAll('.person-card[style*="block"]');
+            if (visibleCards.length === 0) {
+                showNoResults();
+            }
+        }
+
+        function updateStats() {
+            const visibleCards = document.querySelectorAll('.person-card[style*="block"]');
+            const totalFound = visibleCards.length;
+
+            // Update total found
+            document.getElementById('totalFound').textContent = totalFound;
+
+            // Simulate recent found count (found this week)
+            const recentFound = Math.min(5, totalFound); // Simulated
+            document.getElementById('recentFound').textContent = recentFound;
+
+            // Simulate identified count
+            const identified = Math.floor(totalFound * 0.3); // Simulate 30% identified
+            document.getElementById('identified').textContent = identified;
+
+            // Calculate awaiting identification
+            const awaiting = totalFound - identified;
+            document.getElementById('awaiting').textContent = awaiting;
+
+            // Animate stat numbers
+            animateStatNumbers();
+        }
+
+        function animateStatNumbers() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const current = parseInt(stat.textContent);
+                if (!isNaN(current)) {
+                    let count = 0;
+                    const increment = current / 30;
+                    const target = current;
+
+                    const updateCounter = () => {
+                        if (count < target) {
+                            count += increment;
+                            stat.textContent = Math.floor(count);
+                            setTimeout(updateCounter, 30);
+                        } else {
+                            stat.textContent = target;
+                        }
+                    };
+
+                    updateCounter();
+                }
+            });
+        }
+
+
+        function resetFilters() {
+            searchInput.value = '';
+            ageFilter.value = '';
+            locationFilter.value = '';
+            dateFilter.value = '';
+            sortBy.value = 'recent';
+
+            filterPersons();
+
+            // Remove no results message
+            const noResults = document.getElementById('noResults');
+            if (noResults) {
+                noResults.remove();
+            }
+        }
+
+        // (Server-side pagination is handled via links; no JS paging simulation needed here.)
+
+        // Person card interactions
+        personCards.forEach(card => {
+            // Add click to view details (whole card except buttons)
+            card.addEventListener('click', function (e) {
+                if (!e.target.closest('.action-btn')) {
+                    const personId = this.querySelector('.person-id')?.textContent || '';
+                    viewPersonDetails(personId);
+                }
+            });
+
+            // Add hover effect
+            card.addEventListener('mouseenter', function () {
+                const actions = this.querySelector('.action-buttons');
+                if (actions) {
+                    actions.style.transform = 'translateY(0)';
+                    actions.style.opacity = '1';
+                }
+            });
+        });
+
+        // Initialize card animations
+        setTimeout(() => {
+            personCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        }, 300);
+    });
+
+    // Global functions for buttons
+    function viewPersonDetails(personId) {
+        // In a real application, this would navigate to a details page
+        alert(`Viewing details for person: ${personId}\n\nThis would navigate to a detailed view page.`);
+    }
+
+    function reportMatch(personId) {
+        // In a real application, this would open a match reporting form
+        alert(`Reporting a match for person: ${personId}\n\nThis would open a form to report a potential match with a missing person.`);
+    }
+</script>
+
+<style>
+    /* Additional animations and styles */
+    .action-buttons {
+        transition: var(--transition);
+        opacity: 0.9;
+    }
+
+    .person-status {
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.8;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    /* Loading animation */
+    .fa-spinner {
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* Responsive improvements */
+    @media (max-width: 480px) {
+        .person-details {
+            font-size: 0.9rem;
+        }
+
+        .person-description {
+            -webkit-line-clamp: 4;
+        }
+
+        .stat-item {
+            flex: 0 0 100%;
+        }
+
+        .page-btn {
+            width: 35px;
+            height: 35px;
+            font-size: 0.9rem;
+        }
+    }
+</style>
+{% endblock %}
