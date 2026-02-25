@@ -6,12 +6,27 @@ from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.views.decorators.http import require_POST
+from django.http import JsonResponse
 
 from .forms import RegisterForm, MissingPersonForm, FoundPersonForm, ProfileForm
 from .models import UserProfile, MissingPerson, FoundPerson, Conversation, Message
 from .face_utils import extract_embedding, serialize_embedding, deserialize_embedding
 from .matching import find_top_matches
 from .utils import get_or_create_conversation
+
+
+@login_required
+@require_POST
+def delete_report_view(request, report_type, report_id):
+    if report_type == "missing":
+        report = get_object_or_404(MissingPerson, id=report_id, user=request.user)
+    elif report_type == "found":
+        report = get_object_or_404(FoundPerson, id=report_id, user=request.user)
+    else:
+        return JsonResponse({"status": "error", "message": "Invalid report type"}, status=400)
+
+    report.delete()
+    return JsonResponse({"status": "success"})
 
 
 def register_view(request):

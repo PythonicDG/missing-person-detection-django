@@ -1072,12 +1072,8 @@
 
         // File Upload Functionality
         if (dropArea && fileInput) {
-            // Click to upload
-            dropArea.addEventListener('click', function (e) {
-                if (e.target.closest('.upload-button') || e.target === dropArea) {
-                    fileInput.click();
-                }
-            });
+            // Drag and drop functionality
+            // (Label association handles the click naturally)
 
             // Drag and drop
             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
