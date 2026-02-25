@@ -861,37 +861,7 @@
                                 </div>
                             </div>
                         </label>
-                        <div class="file-preview" id="filePreview"
-                            style="margin-top: 1rem; display: none; justify-content: center; align-items: center;">
-                        </div>
-                        <style>
-                            #filePreview img {
-                                display: block;
-                                margin-left: auto;
-                                margin-right: auto;
-                            }
-                        </style>
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function () {
-                                const fileInput = document.getElementById('{{ form.photo.id_for_label }}');
-                                const filePreview = document.getElementById('filePreview');
-                                fileInput.addEventListener('change', function () {
-                                    filePreview.innerHTML = '';
-                                    if (this.files && this.files[0]) {
-                                        const file = this.files[0];
-                                        if (!file.type.match('image.*')) return;
-                                        const reader = new FileReader();
-                                        reader.onload = function (e) {
-                                            filePreview.innerHTML = `<img src="${e.target.result}" alt="Photo preview" style="max-width:200px;max-height:200px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">`;
-                                            filePreview.style.display = 'block';
-                                        };
-                                        reader.readAsDataURL(file);
-                                    } else {
-                                        filePreview.style.display = 'none';
-                                    }
-                                });
-                            });
-                        </script>
+
                         <input type="file" id="{{ form.photo.id_for_label }}" name="{{ form.photo.name }}"
                             class="file-input" accept="image/*" required>
                         <div class="file-preview" id="filePreview">
@@ -989,7 +959,9 @@
                     ageDisplay.textContent = '100+ years';
                     ageDisplay.classList.add('estimated');
                     ageEstimateInput.value = 100;
-                });
+                }
+                setPresetForAge(age);
+            });
 
             // Handle preset clicks
             agePresets.forEach(preset => {
