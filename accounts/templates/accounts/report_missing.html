@@ -1,4 +1,4 @@
-{% extends "accounts/base.html" %}
+﻿{% extends "accounts/base.html" %}
 {% block title %}Report Missing Person - ReuniteHub{% endblock %}
 
 {% block content %}
@@ -250,71 +250,127 @@
         line-height: 1.6;
     }
 
-    /* File Upload Styling */
-    .file-upload-container {
+    /* Traditional Side-by-Side Photo Upload */
+    .photo-upload-layout {
+        display: grid;
+        grid-template-columns: 1fr 200px;
+        gap: 2rem;
+        align-items: start;
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: var(--border-radius);
+        border: 2px dashed #e1e5eb;
+    }
+
+    .upload-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .upload-btn-normal {
+        background: linear-gradient(135deg, var(--secondary-color), #2980b9);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: var(--border-radius);
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        cursor: pointer;
+        transition: var(--transition);
+        border: none;
+    }
+
+    .upload-btn-normal:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    }
+
+    .upload-info-text {
+        color: var(--text-light);
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .preview-container-normal {
+        width: 200px;
+        height: 200px;
+        border-radius: var(--border-radius);
+        background: white;
+        border: 1px solid #e1e5eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
         position: relative;
     }
 
-    .file-upload-label {
+    .preview-container-normal img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: none;
+    }
+
+    .preview-container-normal img.visible {
+        display: block;
+    }
+
+    .preview-placeholder {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        border: 2px dashed #e1e5eb;
-        border-radius: var(--border-radius);
-        padding: 3rem 2rem;
-        text-align: center;
-        cursor: pointer;
-        transition: var(--transition);
-        background: #f8f9fa;
+        gap: 10px;
+        color: #ccd1d9;
     }
 
-    .file-upload-label:hover {
-        border-color: var(--secondary-color);
-        background: rgba(52, 152, 219, 0.05);
-    }
-
-    .file-upload-label.dragover {
-        border-color: var(--success-color);
-        background: rgba(39, 174, 96, 0.05);
-        transform: scale(1.02);
-    }
-
-    .upload-icon {
+    .preview-placeholder i {
         font-size: 3rem;
-        color: var(--secondary-color);
-        margin-bottom: 1rem;
     }
 
-    .upload-text h4 {
-        color: var(--primary-color);
-        margin-bottom: 0.5rem;
-        font-size: 1.1rem;
-    }
-
-    .upload-text p {
-        color: var(--text-light);
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
-    }
-
-    .upload-button {
-        background: linear-gradient(135deg, var(--secondary-color), #2980b9);
-        color: white;
-        border: none;
-        padding: 0.7rem 1.5rem;
-        border-radius: var(--border-radius);
+    .preview-placeholder span {
+        font-size: 0.8rem;
         font-weight: 600;
+    }
+
+    .remove-preview-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        background: rgba(231, 76, 60, 0.9);
+        color: white;
+        border-radius: 50%;
+        display: none;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
         transition: var(--transition);
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
+        z-index: 10;
+        border: none;
     }
 
-    .upload-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+    .remove-preview-btn.visible {
+        display: flex;
+    }
+
+    .remove-preview-btn:hover {
+        background: #e74c3c;
+        transform: scale(1.1);
+    }
+
+    @media (max-width: 600px) {
+        .photo-upload-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .preview-container-normal {
+            width: 100%;
+            height: 250px;
+        }
     }
 
     .file-input {
@@ -598,7 +654,92 @@
             font-size: 2.5rem;
         }
     }
+
+    /* Loading Overlay */
+    .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        backdrop-filter: blur(8px);
+    }
+
+    .loading-overlay.active {
+        display: flex;
+        animation: fadeIn 0.4s ease-out;
+    }
+
+    .loader-content {
+        text-align: center;
+    }
+
+    .loader-pulse {
+        width: 100px;
+        height: 100px;
+        background: var(--secondary-color);
+        border-radius: 50%;
+        margin: 0 auto 2rem;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2.5rem;
+        box-shadow: 0 0 30px rgba(52, 152, 219, 0.4);
+    }
+
+    .loader-pulse::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 4px solid var(--secondary-color);
+        animation: pulseScale 1.5s infinite;
+    }
+
+    @keyframes pulseScale {
+        0% {
+            transform: scale(1);
+            opacity: 0.8;
+        }
+
+        100% {
+            transform: scale(1.8);
+            opacity: 0;
+        }
+    }
+
+    .loader-text h2 {
+        color: var(--primary-color);
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .loader-text p {
+        color: var(--text-light);
+        font-size: 1.1rem;
+    }
 </style>
+
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="loader-content">
+        <div class="loader-pulse">
+            <i class="fas fa-search-plus"></i>
+        </div>
+        <div class="loader-text">
+            <h2>Processing Report</h2>
+            <p>Analyzing photo and searching registry for matches... Please wait.</p>
+        </div>
+    </div>
+</div>
 
 <div class="report-container">
     <!-- Form Header -->
@@ -610,22 +751,7 @@
         </p>
     </div>
 
-    <!-- Display Messages -->
-    {% if messages %}
-    {% for message in messages %}
-    {% if message.tags == 'success' %}
-    <div class="success-message">
-        <i class="fas fa-check-circle"></i>
-        <div>{{ message }}</div>
-    </div>
-    {% elif message.tags == 'error' %}
-    <div class="form-alert">
-        <i class="fas fa-exclamation-circle"></i>
-        <div>{{ message }}</div>
-    </div>
-    {% endif %}
-    {% endfor %}
-    {% endif %}
+    <!-- Dynamic Alerts handled by base.html SweetAlert2 -->
 
 
     <!-- Progress Indicator -->
@@ -764,31 +890,36 @@
 
                 <div class="form-group">
                     <label for="{{ form.photo.id_for_label }}" class="required">
-                        <i class="fas fa-images"></i>
-                        Upload Photo
+                        <i class="fas fa-camera"></i>
+                        Person Photo
                     </label>
-                    <div class="file-upload-container">
-                        <label for="{{ form.photo.id_for_label }}" class="file-upload-label" id="dropArea">
-                            <div class="upload-icon">
+                    <div class="photo-upload-layout" id="dropArea">
+                        <div class="upload-controls">
+                            <label for="{{ form.photo.id_for_label }}" class="upload-btn-normal">
                                 <i class="fas fa-cloud-upload-alt"></i>
+                                Choose Photo
+                            </label>
+                            <div class="upload-info-text">
+                                <p>Upload a clear, front-facing photo.</p>
+                                <p>Max size: 5MB (JPG, PNG)</p>
                             </div>
-                            <div class="upload-text">
-                                <h4>Click to upload or drag and drop</h4>
-                                <p>Upload a clear photo of the missing person (max 5MB, JPG, PNG, or JPEG)</p>
-                                <div class="upload-button">
-                                    <i class="fas fa-plus"></i>
-                                    Choose Photo
-                                </div>
-                            </div>
-                            <input type="file" id="{{ form.photo.id_for_label }}" name="{{ form.photo.name }}"
-                                class="file-input" accept="image/*" required>
-                        </label>
-                        <div class="file-preview" id="filePreview">
-                            <!-- Single photo preview will be shown here -->
                         </div>
+
+                        <div class="preview-container-normal" id="previewContainer">
+                            <div class="preview-placeholder" id="previewPlaceholder">
+                                <i class="fas fa-user"></i>
+                                <span>No Photo</span>
+                            </div>
+                            <img src="" alt="Preview" id="previewImg">
+                            <button type="button" class="remove-preview-btn" id="removePhoto">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <input type="file" id="{{ form.photo.id_for_label }}" name="{{ form.photo.name }}"
+                            class="file-input" accept="image/*" required>
                     </div>
                     {% if form.photo.errors %}
-                    <div class="error-message">
+                    <div class="error-message user">
                         <i class="fas fa-exclamation-circle"></i>
                         {{ form.photo.errors.0 }}
                     </div>
@@ -822,7 +953,9 @@
         const form = document.getElementById('reportForm');
         const dropArea = document.getElementById('dropArea');
         const fileInput = document.getElementById('{{ form.photo.id_for_label }}');
-        const filePreview = document.getElementById('filePreview');
+        const previewImg = document.getElementById('previewImg');
+        const previewPlaceholder = document.getElementById('previewPlaceholder');
+        const removePhoto = document.getElementById('removePhoto');
         const formProgress = document.getElementById('formProgress');
         const progressFill = document.getElementById('progressFill');
 
@@ -905,13 +1038,21 @@
             }
         }
 
+        if (removePhoto) {
+            removePhoto.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                fileInput.value = '';
+                previewImg.classList.remove('visible');
+                previewPlaceholder.style.display = 'flex';
+                removePhoto.classList.remove('visible');
+                updateFormProgress();
+            });
+        }
+
         function handleFiles(files) {
             if (!files.length) return;
 
-            // Clear existing preview
-            filePreview.innerHTML = '';
-
-            // Take only the first file (single photo upload)
             const file = files[0];
 
             // Validate file
@@ -930,31 +1071,13 @@
             // Create preview
             const reader = new FileReader();
             reader.onload = function (e) {
-                const previewItem = document.createElement('div');
-                previewItem.className = 'preview-item';
-                previewItem.innerHTML = `
-                    <img src="${e.target.result}" alt="Photo preview">
-                    <button type="button" class="remove-file">
-                        <i class="fas fa-times"></i>
-                    </button>
-                `;
-                filePreview.appendChild(previewItem);
-
-                // Add remove functionality
-                const removeBtn = previewItem.querySelector('.remove-file');
-                removeBtn.addEventListener('click', function () {
-                    fileInput.value = '';
-                    filePreview.classList.remove('active');
-                    updateFormProgress();
-                });
+                previewImg.src = e.target.result;
+                previewImg.classList.add('visible');
+                previewPlaceholder.style.display = 'none';
+                removePhoto.classList.add('visible');
+                updateFormProgress();
             };
             reader.readAsDataURL(file);
-
-            // Show preview container
-            filePreview.classList.add('active');
-
-            // Update form progress
-            updateFormProgress();
         }
 
         // Form validation
@@ -1072,37 +1195,35 @@
                     // Show loading state
                     const submitBtn = form.querySelector('.btn-submit');
                     const originalText = submitBtn.innerHTML;
+                    const loadingOverlay = document.getElementById('loadingOverlay');
+
                     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
                     submitBtn.disabled = true;
 
-                    // Re-enable after 5 seconds if submission fails
+                    // Show full screen loading overlay
+                    if (loadingOverlay) {
+                        loadingOverlay.classList.add('active');
+                    }
+
+                    // Reset if something goes wrong (timeout)
                     setTimeout(() => {
+                        if (loadingOverlay) loadingOverlay.classList.remove('active');
                         submitBtn.innerHTML = originalText;
                         submitBtn.disabled = false;
-                    }, 5000);
+                    }, 30000); // 30 second safety reset
                 }
             });
         }
 
         function showError(message) {
-            // Remove existing error alerts
-            const existingAlerts = document.querySelectorAll('.form-alert.error');
-            existingAlerts.forEach(alert => alert.remove());
-
-            // Create new error alert
-            const errorAlert = document.createElement('div');
-            errorAlert.className = 'form-alert error';
-            errorAlert.innerHTML = `
-                <i class="fas fa-exclamation-circle"></i>
-                <div>${message}</div>
-            `;
-
-            // Insert after header
-            const header = document.querySelector('.form-header');
-            header.parentNode.insertBefore(errorAlert, header.nextSibling);
-
-            // Scroll to error
-            errorAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            Swal.fire({
+                icon: 'error',
+                title: 'Validation Error',
+                text: message,
+                confirmButtonColor: 'var(--accent-color, #2563eb)',
+                timer: 3000,
+                timerProgressBar: true
+            });
         }
 
         // Initialize progress

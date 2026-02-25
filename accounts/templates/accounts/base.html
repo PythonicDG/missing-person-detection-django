@@ -10,6 +10,7 @@
         content="ReuniteHub – AI-powered missing person detection platform using facial recognition to help reunite families.">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         * {
@@ -181,23 +182,6 @@
             width: 100%;
         }
 
-        /* ALERTS */
-        .alert {
-            padding: .9rem 1.2rem;
-            border-radius: var(--radius);
-            margin-bottom: 1rem;
-        }
-
-        .alert.success {
-            background: #dcfce7;
-            color: var(--success);
-        }
-
-        .alert.error {
-            background: #fee2e2;
-            color: var(--danger);
-        }
-
         /* FOOTER */
         footer {
             background: var(--primary);
@@ -318,12 +302,6 @@
         </div>
     </header>
     <main class="container">
-        {% for message in messages %}
-        <div class="alert {{ message.tags }}">
-            {{ message }}
-        </div>
-        {% endfor %}
-
         {% block content %}{% endblock %}
     </main>
 
@@ -367,8 +345,21 @@
 
             navMenu.addEventListener('click', e => e.stopPropagation());
         }
+
+        // Handle Django Messages with SweetAlert2
+        {% if messages %}
+        {% for message in messages %}
+        Swal.fire({
+            icon: "{% if message.tags == 'error' %}error{% elif message.tags == 'success' %}success{% elif message.tags == 'warning' %}warning{% else %}info{% endif %}",
+            title: "{% if message.tags == 'error' %}Oops...{% elif message.tags == 'success' %}Success!{% else %}Notification{% endif %}",
+            text: "{{ message }}",
+            confirmButtonColor: "var(--accent, #2563eb)",
+        });
+        {% endfor %}
+        {% endif %}
     </script>
-<script src="http://127.0.0.1:5001/static/widget.js" data-server="http://127.0.0.1:5001" data-bot-id="8" data-bot-name="Support Assistant" data-color="#6c63ff" data-welcome="Hi! How I can help you?"> </script>
+    <script src="http://127.0.0.1:5001/static/widget.js" data-server="http://127.0.0.1:5001" data-bot-id="8"
+        data-bot-name="Support Assistant" data-color="#6c63ff" data-welcome="Hi! How I can help you?"> </script>
 </body>
 
 </html>

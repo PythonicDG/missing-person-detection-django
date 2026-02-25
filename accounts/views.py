@@ -118,6 +118,13 @@ def report_missing_view(request):
         obj.face_embedding = serialize_embedding(embedding)
         obj.save()
 
+        # Check if this user already reported this person as FOUND
+        user_found_entries = FoundPerson.objects.filter(user=request.user).exclude(face_embedding__isnull=True)
+        if find_top_matches(embedding, user_found_entries, threshold=0.8):
+            obj.delete()
+            messages.error(request, "You already have added a found person entry for this person.")
+            return redirect("report_missing")
+
         found_people = FoundPerson.objects.exclude(face_embedding__isnull=True)
         matches = find_top_matches(embedding, found_people)
 
@@ -154,6 +161,13 @@ def report_found_view(request):
 
         obj.face_embedding = serialize_embedding(embedding)
         obj.save()
+
+        # Check if this user already reported this person as MISSING
+        user_missing_entries = MissingPerson.objects.filter(user=request.user).exclude(face_embedding__isnull=True)
+        if find_top_matches(embedding, user_missing_entries, threshold=0.8):
+            obj.delete()
+            messages.error(request, "You already have added a missing person entry for this person.")
+            return redirect("report_found")
 
         missing_people = MissingPerson.objects.filter(
             face_embedding__isnull=False,

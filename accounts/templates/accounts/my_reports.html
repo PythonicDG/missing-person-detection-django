@@ -753,7 +753,7 @@
                         {% if m.gender %}
                         <div class="report-detail">
                             <i class="fas fa-venus-mars"></i>
-                            <span>{{ m.gender|default:"Gender unknown" }}</span>
+                            <span>{{ m.get_gender_display|default:"Gender unknown" }}</span>
                         </div>
                         {% endif %}
 
