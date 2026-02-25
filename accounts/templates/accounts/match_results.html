@@ -839,7 +839,8 @@
                 </div>
 
                 <div class="match-actions">
-                    <a href="{% url 'open_chat' person.user.id %}" class="match-btn contact-btn">
+                    <a href="{% url 'open_chat' person.user.id %}?source_id={{ source.id }}&match_id={{ person.id }}&mode={{ mode }}"
+                        class="match-btn contact-btn">
                         <i class="fas fa-paper-plane"></i>
                         Initiate Contact with Reporter
                     </a>

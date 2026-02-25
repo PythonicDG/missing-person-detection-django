@@ -302,7 +302,49 @@ def inbox(request):
 @login_required
 def open_chat(request, user_id):
     other_user = get_object_or_404(User, id=user_id)
+    
+    # Prevent users from messaging themselves
+    if request.user.id == other_user.id:
+        messages.error(request, "This report was added by yourself. You cannot initiate a chat with your own entry.")
+        # Try to redirect back to match results if possible, otherwise dashboard
+        referer = request.META.get('HTTP_REFERER')
+        if referer:
+            return redirect(referer)
+        return redirect("dashboard")
+
     conversation = get_or_create_conversation(request.user, other_user)
+
+    # Auto-send message logic
+    source_id = request.GET.get('source_id')
+    match_id = request.GET.get('match_id')
+    mode = request.GET.get('mode')
+
+    if source_id and match_id and mode:
+        try:
+            if mode == 'missing_to_found':
+                source_obj = MissingPerson.objects.get(id=source_id)
+                match_obj = FoundPerson.objects.get(id=match_id)
+                location = match_obj.found_location
+                person_name = source_obj.name
+                photo = match_obj.photo
+                msg_text = f"I found this person ({person_name}) at {location}."
+            else:
+                source_obj = FoundPerson.objects.get(id=source_id)
+                match_obj = MissingPerson.objects.get(id=match_id)
+                location = source_obj.found_location
+                person_name = match_obj.name
+                photo = source_obj.photo
+                msg_text = f"I found this person ({person_name}) at {location}."
+
+            if not Message.objects.filter(conversation=conversation, sender=request.user, content=msg_text).exists():
+                Message.objects.create(
+                    conversation=conversation,
+                    sender=request.user,
+                    content=msg_text,
+                    image=photo
+                )
+        except (MissingPerson.DoesNotExist, FoundPerson.DoesNotExist):
+            pass
 
     conversation.messages.filter(
         sender=other_user,

@@ -684,6 +684,14 @@
                     {% endif %}
                 </p>
 
+                {% if msg.image %}
+                <div class="message-attachment"
+                    style="margin: 8px 0; border-radius: 8px; overflow: hidden; border: 1px solid rgba(0,0,0,0.1);">
+                    <img src="{{ msg.image.url }}" alt="Attached image"
+                        style="max-width: 100%; max-height: 250px; display: block; object-fit: cover;">
+                </div>
+                {% endif %}
+
 
                 <div class="message-meta">
                     <span class="message-time">{{ msg.ist_time }} IST</span>
