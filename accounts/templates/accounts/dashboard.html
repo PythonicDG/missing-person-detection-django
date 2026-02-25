@@ -19,30 +19,31 @@
         --transition: all 0.3s ease;
         --border-radius: 12px;
     }
-    
+
     .dashboard-container {
         max-width: 1400px;
         margin: 0 auto;
         padding: 2rem;
     }
-    
+
     /* Dashboard Header */
     .dashboard-header {
         margin-bottom: 3rem;
         animation: fadeInDown 0.6s ease-out;
     }
-    
+
     @keyframes fadeInDown {
         from {
             opacity: 0;
             transform: translateY(-20px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
         }
     }
-    
+
     .welcome-section {
         background: linear-gradient(135deg, var(--primary-color) 0%, #1a2530 100%);
         border-radius: var(--border-radius);
@@ -53,7 +54,7 @@
         overflow: hidden;
         margin-bottom: 2rem;
     }
-    
+
     .welcome-section::before {
         content: '';
         position: absolute;
@@ -61,11 +62,11 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: 
+        background-image:
             radial-gradient(circle at 20% 30%, rgba(52, 152, 219, 0.15) 0%, transparent 50%),
             radial-gradient(circle at 80% 70%, rgba(39, 174, 96, 0.1) 0%, transparent 50%);
     }
-    
+
     .welcome-content {
         position: relative;
         z-index: 2;
@@ -75,27 +76,27 @@
         flex-wrap: wrap;
         gap: 2rem;
     }
-    
+
     .welcome-text h1 {
         font-size: 2.5rem;
         font-weight: 700;
         margin-bottom: 0.5rem;
         text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
-    
+
     .welcome-text p {
         font-size: 1.1rem;
         opacity: 0.9;
         line-height: 1.6;
         max-width: 600px;
     }
-    
+
     .welcome-stats {
         display: flex;
         gap: 2rem;
         flex-wrap: wrap;
     }
-    
+
     .stat-item {
         text-align: center;
         padding: 1.5rem;
@@ -106,12 +107,12 @@
         border: 1px solid rgba(255, 255, 255, 0.2);
         transition: var(--transition);
     }
-    
+
     .stat-item:hover {
         background: rgba(255, 255, 255, 0.15);
         transform: translateY(-5px);
     }
-    
+
     .stat-value {
         font-size: 2.5rem;
         font-weight: 700;
@@ -119,13 +120,13 @@
         margin-bottom: 0.5rem;
         display: block;
     }
-    
+
     .stat-label {
         font-size: 0.95rem;
         opacity: 0.9;
         font-weight: 500;
     }
-    
+
     /* Dashboard Grid */
     .dashboard-grid {
         display: grid;
@@ -134,7 +135,7 @@
         gap: 2rem;
         margin-top: 3rem;
     }
-    
+
     .dashboard-card {
         background: white;
         border-radius: var(--border-radius);
@@ -153,23 +154,35 @@
         animation: fadeInUp 0.6s ease-out;
         animation-fill-mode: both;
     }
-    
-    .dashboard-card:nth-child(1) { animation-delay: 0.1s; }
-    .dashboard-card:nth-child(2) { animation-delay: 0.2s; }
-    .dashboard-card:nth-child(3) { animation-delay: 0.3s; }
-    .dashboard-card:nth-child(4) { animation-delay: 0.4s; }
-    
+
+    .dashboard-card:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+
+    .dashboard-card:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .dashboard-card:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+
+    .dashboard-card:nth-child(4) {
+        animation-delay: 0.4s;
+    }
+
     @keyframes fadeInUp {
         from {
             opacity: 0;
             transform: translateY(30px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
         }
     }
-    
+
     .dashboard-card::before {
         content: '';
         position: absolute;
@@ -179,33 +192,33 @@
         height: 6px;
         transition: var(--transition);
     }
-    
+
     .dashboard-card:nth-child(1)::before {
         background: linear-gradient(90deg, var(--secondary-color), #2980b9);
     }
-    
+
     .dashboard-card:nth-child(2)::before {
         background: linear-gradient(90deg, var(--success-color), #2ecc71);
     }
-    
+
     .dashboard-card:nth-child(3)::before {
         background: linear-gradient(90deg, var(--warning-color), #f1c40f);
     }
-    
+
     .dashboard-card:nth-child(4)::before {
         background: linear-gradient(90deg, #9b59b6, #8e44ad);
     }
-    
+
     .dashboard-card:hover {
         transform: translateY(-10px);
         box-shadow: var(--shadow-hover);
     }
-    
+
     .dashboard-card:hover::before {
         height: 100%;
         opacity: 0.05;
     }
-    
+
     .card-icon {
         width: 80px;
         height: 80px;
@@ -220,43 +233,43 @@
         z-index: 2;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
-    
+
     .dashboard-card:nth-child(1) .card-icon {
         background: linear-gradient(135deg, var(--secondary-color), #2980b9);
     }
-    
+
     .dashboard-card:nth-child(2) .card-icon {
         background: linear-gradient(135deg, var(--success-color), #2ecc71);
     }
-    
+
     .dashboard-card:nth-child(3) .card-icon {
         background: linear-gradient(135deg, var(--warning-color), #f1c40f);
     }
-    
+
     .dashboard-card:nth-child(4) .card-icon {
         background: linear-gradient(135deg, #9b59b6, #8e44ad);
     }
-    
+
     .card-content {
         position: relative;
         z-index: 2;
         width: 100%;
     }
-    
+
     .dashboard-card h3 {
         font-size: 1.5rem;
         font-weight: 700;
         margin-bottom: 1rem;
         color: var(--primary-color);
     }
-    
+
     .dashboard-card p {
         color: var(--text-light);
         line-height: 1.6;
         margin-bottom: 1.5rem;
         font-size: 0.95rem;
     }
-    
+
     .card-arrow {
         display: inline-flex;
         align-items: center;
@@ -269,13 +282,13 @@
         font-size: 1.2rem;
         transition: var(--transition);
     }
-    
+
     .dashboard-card:hover .card-arrow {
         transform: translateX(5px);
         background: var(--secondary-color);
         color: white;
     }
-    
+
     /* Quick Stats Section */
     .quick-stats {
         display: grid;
@@ -284,12 +297,17 @@
         margin-top: 3rem;
         animation: fadeIn 0.8s ease-out 0.5s both;
     }
-    
+
     @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
     }
-    
+
     .stat-card {
         background: white;
         border-radius: var(--border-radius);
@@ -301,12 +319,12 @@
         gap: 1rem;
         transition: var(--transition);
     }
-    
+
     .stat-card:hover {
         transform: translateY(-5px);
         box-shadow: var(--shadow-hover);
     }
-    
+
     .stat-icon {
         width: 50px;
         height: 50px;
@@ -318,36 +336,36 @@
         color: white;
         flex-shrink: 0;
     }
-    
+
     .stat-card:nth-child(1) .stat-icon {
         background: linear-gradient(135deg, var(--secondary-color), #2980b9);
     }
-    
+
     .stat-card:nth-child(2) .stat-icon {
         background: linear-gradient(135deg, var(--success-color), #2ecc71);
     }
-    
+
     .stat-card:nth-child(3) .stat-icon {
         background: linear-gradient(135deg, var(--warning-color), #f1c40f);
     }
-    
+
     .stat-card:nth-child(4) .stat-icon {
         background: linear-gradient(135deg, #e74c3c, #c0392b);
     }
-    
+
     .stat-info h4 {
         font-size: 1.8rem;
         font-weight: 700;
         color: var(--primary-color);
         margin-bottom: 0.2rem;
     }
-    
+
     .stat-info p {
         font-size: 0.9rem;
         color: var(--text-light);
         margin: 0;
     }
-    
+
     /* Recent Activity */
     .recent-activity {
         margin-top: 3rem;
@@ -358,7 +376,7 @@
         animation: fadeIn 0.8s ease-out 0.7s both;
         border: 1px solid rgba(0, 0, 0, 0.05);
     }
-    
+
     .recent-activity h2 {
         font-size: 1.5rem;
         font-weight: 700;
@@ -368,13 +386,13 @@
         align-items: center;
         gap: 10px;
     }
-    
+
     .activity-list {
         display: flex;
         flex-direction: column;
         gap: 1rem;
     }
-    
+
     .activity-item {
         display: flex;
         align-items: center;
@@ -384,12 +402,12 @@
         background: #f8f9fa;
         transition: var(--transition);
     }
-    
+
     .activity-item:hover {
         background: #e9ecef;
         transform: translateX(5px);
     }
-    
+
     .activity-icon {
         width: 40px;
         height: 40px;
@@ -401,35 +419,35 @@
         color: white;
         flex-shrink: 0;
     }
-    
+
     .activity-item:nth-child(1) .activity-icon {
         background: linear-gradient(135deg, var(--secondary-color), #2980b9);
     }
-    
+
     .activity-item:nth-child(2) .activity-icon {
         background: linear-gradient(135deg, var(--success-color), #2ecc71);
     }
-    
+
     .activity-info h4 {
         font-size: 1rem;
         font-weight: 600;
         color: var(--primary-color);
         margin-bottom: 0.2rem;
     }
-    
+
     .activity-info p {
         font-size: 0.85rem;
         color: var(--text-light);
         margin: 0;
     }
-    
+
     .activity-time {
         margin-left: auto;
         font-size: 0.8rem;
         color: var(--text-light);
         white-space: nowrap;
     }
-    
+
     /* Empty State */
     .empty-state {
         text-align: center;
@@ -440,26 +458,26 @@
         border: 2px dashed #e1e5eb;
         animation: fadeIn 0.8s ease-out;
     }
-    
+
     .empty-icon {
         font-size: 4rem;
         color: #e1e5eb;
         margin-bottom: 1.5rem;
     }
-    
+
     .empty-state h3 {
         font-size: 1.5rem;
         color: var(--primary-color);
         margin-bottom: 1rem;
     }
-    
+
     .empty-state p {
         color: var(--text-light);
         max-width: 500px;
         margin: 0 auto 2rem;
         line-height: 1.6;
     }
-    
+
     /* Responsive Design */
     @media (max-width: 1200px) {
         .dashboard-grid {
@@ -467,74 +485,74 @@
             grid-template-columns: repeat(4, minmax(0, 1fr));
         }
     }
-    
+
     @media (max-width: 992px) {
         .dashboard-container {
             padding: 1.5rem;
         }
-        
+
         .welcome-content {
             flex-direction: column;
             text-align: center;
         }
-        
+
         .welcome-stats {
             justify-content: center;
         }
-        
+
         .stat-item {
             min-width: 120px;
         }
     }
-    
+
     @media (max-width: 768px) {
         .dashboard-grid {
             grid-template-columns: 1fr;
             gap: 1.5rem;
         }
-        
+
         .welcome-text h1 {
             font-size: 2rem;
         }
-        
+
         .dashboard-card {
             padding: 2rem;
         }
-        
+
         .quick-stats {
             grid-template-columns: repeat(2, 1fr);
         }
-        
+
         .recent-activity {
             padding: 1.5rem;
         }
     }
-    
+
     @media (max-width: 576px) {
         .dashboard-container {
             padding: 1rem;
         }
-        
+
         .welcome-section {
             padding: 2rem 1.5rem;
         }
-        
+
         .stat-item {
             min-width: 100%;
         }
-        
+
         .welcome-stats {
             gap: 1rem;
         }
-        
+
         .quick-stats {
             grid-template-columns: 1fr;
         }
-        
+
         .dashboard-card h3 {
             font-size: 1.3rem;
         }
-        
+
         .card-icon {
             width: 70px;
             height: 70px;
@@ -554,19 +572,19 @@
                 </div>
                 <div class="welcome-stats">
                     <div class="stat-item">
-    <span class="stat-value">{{ missing_reports_count }}</span>
-    <span class="stat-label">Missing Reports</span>
-</div>
+                        <span class="stat-value">{{ missing_reports_count }}</span>
+                        <span class="stat-label">Missing Reports</span>
+                    </div>
 
-            <div class="stat-item">
-                <span class="stat-value">{{ found_reports_count }}</span>
-                <span class="stat-label">Found Reports</span>
-            </div>
+                    <div class="stat-item">
+                        <span class="stat-value">{{ found_reports_count }}</span>
+                        <span class="stat-label">Found Reports</span>
+                    </div>
 
-            <div class="stat-item">
-                <span class="stat-value">{{ total_reunited }}</span>
-                <span class="stat-label"    >Reunited</span>
-            </div>
+                    <div class="stat-item">
+                        <span class="stat-value">{{ total_reunited }}</span>
+                        <span class="stat-label">Reunited</span>
+                    </div>
 
                 </div>
             </div>
@@ -614,13 +632,13 @@
             </div>
         </a>
 
-        <a href="{% url 'view_report' %}" class="dashboard-card">
+        <a href="{% url 'browse_missing' %}" class="dashboard-card">
             <div class="card-icon">
-                <i class="fas fa-clipboard-list"></i>
+                <i class="fas fa-users-viewfinder"></i>
             </div>
             <div class="card-content">
-                <h3>My Reports</h3>
-                <p>Manage and track all your submitted reports, updates, and communication</p>
+                <h3>Browse Missing Persons</h3>
+                <p>Search through the directory of missing persons and help families reconnect with their loved ones</p>
                 <div class="card-arrow">
                     <i class="fas fa-arrow-right"></i>
                 </div>
@@ -684,7 +702,8 @@
             <i class="fas fa-user-clock"></i>
         </div>
         <h3>Welcome to Your Dashboard</h3>
-        <p>Get started by reporting a missing person or browsing found persons to help reunite families. Your actions make a difference.</p>
+        <p>Get started by reporting a missing person or browsing found persons to help reunite families. Your actions
+            make a difference.</p>
         <a href="{% url 'report_missing' %}" class="auth-button" style="width: auto; padding: 0.8rem 2rem;">
             <i class="fas fa-plus"></i>
             Get Started
@@ -694,27 +713,27 @@
 
 <script>
     fetch("/api/recent-activities/")
-    .then(res => res.json())
-    .then(data => {
-        const container = document.getElementById("activityList");
-        container.innerHTML = "";
+        .then(res => res.json())
+        .then(data => {
+            const container = document.getElementById("activityList");
+            container.innerHTML = "";
 
-        if (data.length === 0) {
-            container.innerHTML = "<p>No recent activity</p>";
-            return;
-        }
+            if (data.length === 0) {
+                container.innerHTML = "<p>No recent activity</p>";
+                return;
+            }
 
-        data.forEach(item => {
-            let iconClass = "fa-clock";
+            data.forEach(item => {
+                let iconClass = "fa-clock";
 
-            if (item.activity_type === "missing_reported") iconClass = "fa-user-minus";
-            if (item.activity_type === "found_reported") iconClass = "fa-user-check";
-            if (item.activity_type === "match_found") iconClass = "fa-link";
+                if (item.activity_type === "missing_reported") iconClass = "fa-user-minus";
+                if (item.activity_type === "found_reported") iconClass = "fa-user-check";
+                if (item.activity_type === "match_found") iconClass = "fa-link";
 
-            const div = document.createElement("div");
-            div.className = "activity-item";
+                const div = document.createElement("div");
+                div.className = "activity-item";
 
-            div.innerHTML = `
+                div.innerHTML = `
                 <div class="activity-icon">
                     <i class="fas ${iconClass}"></i>
                 </div>
@@ -724,16 +743,16 @@
                 <div class="activity-time">${item.time_ago}</div>
             `;
 
-            container.appendChild(div);
+                container.appendChild(div);
+            });
+        })
+        .catch(() => {
+            document.getElementById("activityList").innerHTML =
+                "<p>Unable to load activity</p>";
         });
-    })
-    .catch(() => {
-        document.getElementById("activityList").innerHTML =
-            "<p>Unable to load activity</p>";
-    });
 
-    
-    document.addEventListener('DOMContentLoaded', function() {
+
+    document.addEventListener('DOMContentLoaded', function () {
         // Animate stat counters
         const statValues = {
             activeReports: 3,
@@ -744,7 +763,7 @@
             activeVolunteers: 150,
             countries: 50
         };
-        
+
         // Animate main stats
         Object.keys(statValues).forEach(statId => {
             const element = document.getElementById(statId);
@@ -753,25 +772,25 @@
                 let current = 0;
                 const increment = target / 50;
                 const duration = 1500;
-                
+
                 const updateCounter = () => {
                     if (current < target) {
                         current += increment;
-                        element.textContent = statId.includes('Rate') || statId.includes('Time') 
+                        element.textContent = statId.includes('Rate') || statId.includes('Time')
                             ? `${Math.min(current, target).toFixed(0)}${statId.includes('Rate') ? '%' : statId.includes('Time') ? 'h' : ''}`
                             : Math.floor(current);
                         setTimeout(updateCounter, duration / 50);
                     } else {
-                        element.textContent = statId.includes('Rate') 
-                            ? `${target}%` 
-                            : statId.includes('Time') 
-                            ? `${target}h`
-                            : statId.includes('activeVolunteers') || statId.includes('countries')
-                            ? `${target}+`
-                            : target;
+                        element.textContent = statId.includes('Rate')
+                            ? `${target}%`
+                            : statId.includes('Time')
+                                ? `${target}h`
+                                : statId.includes('activeVolunteers') || statId.includes('countries')
+                                    ? `${target}+`
+                                    : target;
                     }
                 };
-                
+
                 // Start counter when in viewport
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
@@ -781,52 +800,52 @@
                         }
                     });
                 }, { threshold: 0.5 });
-                
+
                 observer.observe(element);
             }
         });
-        
+
         // Card hover effects
         const dashboardCards = document.querySelectorAll('.dashboard-card');
         dashboardCards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
+            card.addEventListener('mouseenter', function () {
                 const arrow = this.querySelector('.card-arrow');
                 if (arrow) {
                     arrow.style.transform = 'translateX(8px)';
                 }
             });
-            
-            card.addEventListener('mouseleave', function() {
+
+            card.addEventListener('mouseleave', function () {
                 const arrow = this.querySelector('.card-arrow');
                 if (arrow) {
                     arrow.style.transform = 'translateX(0)';
                 }
             });
         });
-        
+
         // Check if user has any activity (for demo, always show activity)
         // In production, you would check actual user data
         const hasActivity = true; // Replace with actual check
-        
+
         if (!hasActivity) {
             document.getElementById('emptyState').style.display = 'block';
             document.querySelector('.recent-activity').style.display = 'none';
         }
-        
+
         // Add click tracking for analytics
         dashboardCards.forEach(card => {
-            card.addEventListener('click', function(e) {
+            card.addEventListener('click', function (e) {
                 const cardTitle = this.querySelector('h3').textContent;
                 console.log(`Dashboard card clicked: ${cardTitle}`);
                 // You can send this to analytics here
             });
         });
-        
+
         // Update welcome message based on time of day
         const welcomeText = document.querySelector('.welcome-text h1');
         const hour = new Date().getHours();
         let greeting = '';
-        
+
         if (hour < 12) {
             greeting = 'Good morning';
         } else if (hour < 18) {
@@ -834,11 +853,11 @@
         } else {
             greeting = 'Good evening';
         }
-        
+
         if (welcomeText) {
             welcomeText.textContent = `${greeting}, ${user.username || 'User'}!`;
         }
-        
+
         // Simulate real-time updates (for demo)
         setInterval(() => {
             // Update activity time labels
@@ -850,14 +869,14 @@
                 }
             });
         }, 60000); // Update every minute
-        
+
         // Add loading animation for cards
         setTimeout(() => {
             dashboardCards.forEach((card, index) => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px)';
                 card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                
+
                 setTimeout(() => {
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
@@ -870,20 +889,30 @@
 <style>
     /* Additional animations */
     @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.05);
+        }
+
+        100% {
+            transform: scale(1);
+        }
     }
-    
+
     .dashboard-card:hover .card-icon {
         animation: pulse 1s ease-in-out;
     }
-    
+
     /* Smooth transitions for all interactive elements */
-    .stat-item, .stat-card, .activity-item {
+    .stat-item,
+    .stat-card,
+    .activity-item {
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
+
     /* Gradient text effect for stats */
     .stat-value {
         background: linear-gradient(135deg, var(--secondary-color), var(--success-color));
@@ -891,27 +920,27 @@
         -webkit-text-fill-color: transparent;
         background-clip: text;
     }
-    
+
     /* Responsive adjustments */
     @media (max-width: 480px) {
         .welcome-text h1 {
             font-size: 1.8rem;
         }
-        
+
         .dashboard-card {
             padding: 1.5rem;
         }
-        
+
         .card-icon {
             width: 60px;
             height: 60px;
             font-size: 1.5rem;
         }
-        
+
         .quick-stats {
             gap: 1rem;
         }
-        
+
         .stat-card {
             padding: 1.2rem;
         }

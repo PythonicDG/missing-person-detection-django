@@ -281,7 +281,12 @@
                         <div class="profile-menu-header">
                             {{ request.user.email|default:"-" }}
                         </div>
-                        <a href="{% url 'update_profile' %}">Update Profile</a>
+                        <a href="{% url 'update_profile' %}">
+                            <i class="fas fa-user-edit"></i> Update Profile
+                        </a>
+                        <a href="{% url 'view_report' %}">
+                            <i class="fas fa-clipboard-list"></i> My Reports
+                        </a>
                         <form method="post" action="{% url 'logout' %}" style="margin:0;">
                             {% csrf_token %}
                             <button type="submit"

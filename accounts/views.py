@@ -213,6 +213,22 @@ def view_found_view(request):
 
 
 @login_required
+def view_missing_view(request):
+    missing_qs = MissingPerson.objects.select_related("user").order_by("-reported_at")
+
+    paginator = Paginator(missing_qs, 9)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        "missing_list": page_obj.object_list,
+        "page_obj": page_obj,
+    }
+
+    return render(request, "accounts/view_missing.html", context)
+
+
+@login_required
 def my_reports_view(request):
     missing = MissingPerson.objects.filter(user=request.user).select_related("user")
     found = FoundPerson.objects.filter(user=request.user).select_related("user")
