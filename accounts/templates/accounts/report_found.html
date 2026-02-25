@@ -19,29 +19,30 @@
         --transition: all 0.3s ease;
         --border-radius: 12px;
     }
-    
+
     .report-container {
         max-width: 1200px;
         margin: 0 auto;
         padding: 2rem;
         animation: fadeIn 0.6s ease-out;
     }
-    
+
     @keyframes fadeIn {
         from {
             opacity: 0;
         }
+
         to {
             opacity: 1;
         }
     }
-    
+
     /* Form Header */
     .form-header {
         margin-bottom: 3rem;
         text-align: center;
     }
-    
+
     .form-header h1 {
         font-size: 2.5rem;
         color: var(--primary-color);
@@ -50,7 +51,7 @@
         position: relative;
         display: inline-block;
     }
-    
+
     .form-header h1::after {
         content: '';
         position: absolute;
@@ -62,7 +63,7 @@
         background: linear-gradient(90deg, var(--success-color), #2ecc71);
         border-radius: 2px;
     }
-    
+
     .form-header p {
         color: var(--text-light);
         font-size: 1.1rem;
@@ -70,7 +71,7 @@
         max-width: 700px;
         margin: 2rem auto 0;
     }
-    
+
     .form-alert {
         background: rgba(52, 152, 219, 0.1);
         color: var(--secondary-color);
@@ -84,23 +85,24 @@
         gap: 12px;
         animation: slideInDown 0.4s ease-out;
     }
-    
+
     @keyframes slideInDown {
         from {
             opacity: 0;
             transform: translateY(-20px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
         }
     }
-    
+
     .form-alert i {
         font-size: 1.5rem;
         flex-shrink: 0;
     }
-    
+
     /* Form Layout */
     .report-form {
         background: white;
@@ -111,7 +113,7 @@
         overflow: hidden;
         border: 1px solid rgba(0, 0, 0, 0.05);
     }
-    
+
     .report-form::before {
         content: '';
         position: absolute;
@@ -121,32 +123,38 @@
         height: 6px;
         background: linear-gradient(90deg, var(--success-color), #2ecc71);
     }
-    
+
     .form-sections {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 3rem;
     }
-    
+
     .form-section {
         animation: fadeInUp 0.6s ease-out;
         animation-fill-mode: both;
     }
-    
-    .form-section:nth-child(1) { animation-delay: 0.1s; }
-    .form-section:nth-child(2) { animation-delay: 0.2s; }
-    
+
+    .form-section:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+
+    .form-section:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
     @keyframes fadeInUp {
         from {
             opacity: 0;
             transform: translateY(30px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
         }
     }
-    
+
     .section-header {
         display: flex;
         align-items: center;
@@ -155,7 +163,7 @@
         padding-bottom: 1rem;
         border-bottom: 2px solid #f0f2f5;
     }
-    
+
     .section-icon {
         width: 50px;
         height: 50px;
@@ -168,20 +176,20 @@
         font-size: 1.3rem;
         box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
     }
-    
+
     .section-header h3 {
         font-size: 1.5rem;
         color: var(--primary-color);
         margin: 0;
         font-weight: 600;
     }
-    
+
     /* Form Groups */
     .form-group {
         margin-bottom: 1.8rem;
         position: relative;
     }
-    
+
     .form-group label {
         display: block;
         margin-bottom: 0.6rem;
@@ -192,18 +200,18 @@
         align-items: center;
         gap: 8px;
     }
-    
+
     .form-group label i {
         color: var(--success-color);
         font-size: 0.9rem;
     }
-    
+
     .required::after {
         content: '*';
         color: var(--accent-color);
         margin-left: 4px;
     }
-    
+
     .form-control {
         width: 100%;
         padding: 0.9rem 1.2rem;
@@ -215,18 +223,18 @@
         color: var(--text-color);
         font-family: inherit;
     }
-    
+
     .form-control:focus {
         outline: none;
         border-color: var(--success-color);
         box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.15);
         transform: translateY(-1px);
     }
-    
+
     .form-control::placeholder {
         color: #a0aec0;
     }
-    
+
     select.form-control {
         appearance: none;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%237f8c8d' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
@@ -235,13 +243,13 @@
         background-size: 16px;
         padding-right: 3rem;
     }
-    
+
     textarea.form-control {
         min-height: 120px;
         resize: vertical;
         line-height: 1.6;
     }
-    
+
     /* Age Range Slider */
     .age-range-container {
         background: #f8f9fa;
@@ -249,18 +257,18 @@
         padding: 1.5rem;
         border: 1px solid #e1e5eb;
     }
-    
+
     .age-slider-container {
         margin-bottom: 1.5rem;
     }
-    
+
     .slider-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 1rem;
     }
-    
+
     .age-display {
         font-size: 1.1rem;
         font-weight: 600;
@@ -272,13 +280,13 @@
         min-width: 80px;
         text-align: center;
     }
-    
+
     .age-display.estimated {
         background: linear-gradient(135deg, var(--success-color), #2ecc71);
         color: white;
         border-color: transparent;
     }
-    
+
     .slider-labels {
         display: flex;
         justify-content: space-between;
@@ -286,13 +294,13 @@
         color: var(--text-light);
         font-size: 0.9rem;
     }
-    
+
     .age-presets {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
         gap: 0.5rem;
     }
-    
+
     .age-preset {
         background: white;
         border: 2px solid #e1e5eb;
@@ -303,23 +311,23 @@
         transition: var(--transition);
         font-weight: 500;
     }
-    
+
     .age-preset:hover {
         border-color: var(--success-color);
         background: rgba(39, 174, 96, 0.05);
     }
-    
+
     .age-preset.active {
         background: linear-gradient(135deg, var(--success-color), #2ecc71);
         color: white;
         border-color: transparent;
     }
-    
+
     /* File Upload Styling */
     .file-upload-container {
         position: relative;
     }
-    
+
     .file-upload-label {
         display: flex;
         flex-direction: column;
@@ -333,36 +341,36 @@
         transition: var(--transition);
         background: #f8f9fa;
     }
-    
+
     .file-upload-label:hover {
         border-color: var(--success-color);
         background: rgba(39, 174, 96, 0.05);
     }
-    
+
     .file-upload-label.dragover {
         border-color: var(--secondary-color);
         background: rgba(52, 152, 219, 0.05);
         transform: scale(1.02);
     }
-    
+
     .upload-icon {
         font-size: 3rem;
         color: var(--success-color);
         margin-bottom: 1rem;
     }
-    
+
     .upload-text h4 {
         color: var(--primary-color);
         margin-bottom: 0.5rem;
         font-size: 1.1rem;
     }
-    
+
     .upload-text p {
         color: var(--text-light);
         font-size: 0.9rem;
         margin-bottom: 1rem;
     }
-    
+
     .upload-button {
         background: linear-gradient(135deg, var(--success-color), #2ecc71);
         color: white;
@@ -376,16 +384,16 @@
         align-items: center;
         gap: 8px;
     }
-    
+
     .upload-button:hover {
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
     }
-    
+
     .file-input {
         display: none;
     }
-    
+
     .file-preview {
         margin-top: 1.5rem;
         display: none;
@@ -394,12 +402,12 @@
         flex-wrap: wrap;
         gap: 1rem;
     }
-    
+
     .file-preview.active {
         display: flex;
         animation: fadeIn 0.3s ease;
     }
-    
+
     .preview-item {
         position: relative;
         border-radius: var(--border-radius);
@@ -409,19 +417,19 @@
         width: 150px;
         height: 150px;
     }
-    
+
     .preview-item:hover {
         transform: translateY(-5px);
         box-shadow: var(--shadow-hover);
     }
-    
+
     .preview-item img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
     }
-    
+
     .remove-file {
         position: absolute;
         top: 5px;
@@ -439,12 +447,12 @@
         font-size: 0.9rem;
         transition: var(--transition);
     }
-    
+
     .remove-file:hover {
         background: var(--accent-color);
         transform: scale(1.1);
     }
-    
+
     /* Form Actions */
     .form-actions {
         grid-column: 1 / -1;
@@ -457,24 +465,24 @@
         flex-wrap: wrap;
         gap: 1.5rem;
     }
-    
+
     .form-note {
         color: var(--text-light);
         font-size: 0.9rem;
         flex: 1;
     }
-    
+
     .form-note i {
         color: var(--accent-color);
         margin-right: 5px;
     }
-    
+
     .button-group {
         display: flex;
         gap: 1rem;
         flex-wrap: wrap;
     }
-    
+
     .btn {
         padding: 0.9rem 2rem;
         font-size: 1rem;
@@ -489,30 +497,30 @@
         gap: 10px;
         min-width: 140px;
     }
-    
+
     .btn-submit {
         background: linear-gradient(135deg, var(--success-color), #2ecc71);
         color: white;
         box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
     }
-    
+
     .btn-submit:hover {
         transform: translateY(-3px);
         box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
     }
-    
+
     .btn-cancel {
         background: transparent;
         color: var(--text-light);
         border: 2px solid #e1e5eb;
     }
-    
+
     .btn-cancel:hover {
         background: #f8f9fa;
         border-color: var(--text-light);
         color: var(--text-color);
     }
-    
+
     /* Error Styling */
     .error-message {
         color: var(--accent-color);
@@ -523,18 +531,35 @@
         gap: 5px;
         animation: shake 0.5s ease;
     }
-    
+
     @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-        20%, 40%, 60%, 80% { transform: translateX(5px); }
+
+        0%,
+        100% {
+            transform: translateX(0);
+        }
+
+        10%,
+        30%,
+        50%,
+        70%,
+        90% {
+            transform: translateX(-5px);
+        }
+
+        20%,
+        40%,
+        60%,
+        80% {
+            transform: translateX(5px);
+        }
     }
-    
+
     .form-control.error {
         border-color: var(--accent-color);
         box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
     }
-    
+
     /* Success Message */
     .success-message {
         background: rgba(39, 174, 96, 0.1);
@@ -548,13 +573,13 @@
         gap: 12px;
         animation: slideInDown 0.4s ease-out;
     }
-    
+
     /* Progress Indicator */
     .form-progress {
         margin-bottom: 3rem;
         display: none;
     }
-    
+
     .progress-bar {
         height: 6px;
         background: #f0f2f5;
@@ -562,7 +587,7 @@
         overflow: hidden;
         position: relative;
     }
-    
+
     .progress-fill {
         position: absolute;
         height: 100%;
@@ -571,85 +596,85 @@
         transition: width 0.3s ease;
         width: 0%;
     }
-    
+
     /* Responsive Design */
     @media (max-width: 992px) {
         .form-sections {
             grid-template-columns: 1fr;
             gap: 2rem;
         }
-        
+
         .report-form {
             padding: 2rem;
         }
-        
+
         .form-header h1 {
             font-size: 2.2rem;
         }
     }
-    
+
     @media (max-width: 768px) {
         .report-container {
             padding: 1.5rem;
         }
-        
+
         .form-actions {
             flex-direction: column;
             align-items: stretch;
         }
-        
+
         .button-group {
             width: 100%;
             justify-content: stretch;
         }
-        
+
         .btn {
             flex: 1;
             min-width: 0;
         }
-        
+
         .form-header h1 {
             font-size: 2rem;
         }
-        
+
         .file-preview {
             justify-content: center;
         }
-        
+
         .preview-item {
             width: 120px;
             height: 120px;
         }
-        
+
         .age-range-container {
             padding: 1.2rem;
         }
     }
-    
+
     @media (max-width: 576px) {
         .report-form {
             padding: 1.5rem;
         }
-        
+
         .form-header h1 {
             font-size: 1.8rem;
         }
-        
+
         .section-header {
             flex-direction: column;
             text-align: center;
             gap: 1rem;
         }
-        
+
         .preview-item {
             width: 100px;
             height: 100px;
         }
-        
+
         .upload-icon {
             font-size: 2.5rem;
         }
-        
+
         .age-presets {
             grid-template-columns: repeat(3, 1fr);
         }
@@ -661,26 +686,26 @@
     <div class="form-header">
         <h1>Report Found Person</h1>
         <p>
-            Help reunite someone with their loved ones by reporting a found person. 
+            Help reunite someone with their loved ones by reporting a found person.
             Your information could be the key to bringing a family back together.
         </p>
     </div>
 
     <!-- Display Messages -->
     {% if messages %}
-        {% for message in messages %}
-            {% if message.tags == 'success' %}
-            <div class="success-message">
-                <i class="fas fa-check-circle"></i>
-                <div>{{ message }}</div>
-            </div>
-            {% elif message.tags == 'error' %}
-            <div class="form-alert">
-                <i class="fas fa-exclamation-circle"></i>
-                <div>{{ message }}</div>
-            </div>
-            {% endif %}
-        {% endfor %}
+    {% for message in messages %}
+    {% if message.tags == 'success' %}
+    <div class="success-message">
+        <i class="fas fa-check-circle"></i>
+        <div>{{ message }}</div>
+    </div>
+    {% elif message.tags == 'error' %}
+    <div class="form-alert">
+        <i class="fas fa-exclamation-circle"></i>
+        <div>{{ message }}</div>
+    </div>
+    {% endif %}
+    {% endfor %}
     {% endif %}
 
     <!-- Progress Indicator -->
@@ -693,7 +718,7 @@
     <!-- Report Form -->
     <form method="post" enctype="multipart/form-data" class="report-form" id="reportForm">
         {% csrf_token %}
-        
+
         <div class="form-sections">
             <!-- Personal Information Section -->
             <div class="form-section">
@@ -710,14 +735,8 @@
                         <i class="fas fa-signature"></i>
                         Known Name (if any)
                     </label>
-                    <input 
-                        type="text" 
-                        id="{{ form.name.id_for_label }}"
-                        name="{{ form.name.name }}"
-                        class="form-control"
-                        placeholder="Enter name if known"
-                        value="{{ form.name.value|default:'' }}"
-                    >
+                    <input type="text" id="{{ form.name.id_for_label }}" name="{{ form.name.name }}"
+                        class="form-control" placeholder="Enter name if known" value="{{ form.name.value|default:'' }}">
                     {% if form.name.errors %}
                     <div class="error-message">
                         <i class="fas fa-exclamation-circle"></i>
@@ -728,7 +747,7 @@
 
                 <!-- Age Estimate -->
                 <div class="form-group">
-                    <label for="age_estimate_slider" class="required">
+                    <label for="age_estimate_slider">
                         <i class="fas fa-user-clock"></i>
                         Estimated Age
                     </label>
@@ -738,14 +757,8 @@
                                 <span>Age Range:</span>
                                 <div class="age-display" id="ageDisplay">Unknown</div>
                             </div>
-                            <input 
-                                type="range" 
-                                id="age_estimate_slider"
-                                class="form-control"
-                                min="0"
-                                max="100"
-                                value="0"
-                            >
+                            <input type="range" id="age_estimate_slider" class="form-control" min="0" max="100"
+                                value="0">
                             <div class="slider-labels">
                                 <span>0</span>
                                 <span>50</span>
@@ -762,12 +775,8 @@
                         </div>
                     </div>
                     <!-- Hidden field to store the actual numeric value (empty if unknown) -->
-                    <input 
-                        type="hidden" 
-                        id="{{ form.age_estimate.id_for_label }}"
-                        name="{{ form.age_estimate.name }}"
-                        value="{{ form.age_estimate.value|default:'' }}"
-                    >
+                    <input type="hidden" id="{{ form.age_estimate.id_for_label }}" name="{{ form.age_estimate.name }}"
+                        value="{{ form.age_estimate.value|default:'' }}">
 
                     {% if form.age_estimate.errors %}
                     <div class="error-message">
@@ -789,19 +798,13 @@
 
                 <!-- Found Location -->
                 <div class="form-group">
-                    <label for="{{ form.found_location.id_for_label }}" class="required">
+                    <label for="{{ form.found_location.id_for_label }}">
                         <i class="fas fa-map-pin"></i>
                         Where Found
                     </label>
-                    <input 
-                        type="text" 
-                        id="{{ form.found_location.id_for_label }}"
-                        name="{{ form.found_location.name }}"
-                        class="form-control"
-                        placeholder="Enter exact or approximate location"
-                        value="{{ form.found_location.value|default:'' }}"
-                        required
-                    >
+                    <input type="text" id="{{ form.found_location.id_for_label }}" name="{{ form.found_location.name }}"
+                        class="form-control" placeholder="Enter exact or approximate location"
+                        value="{{ form.found_location.value|default:'' }}">
                     {% if form.found_location.errors %}
                     <div class="error-message">
                         <i class="fas fa-exclamation-circle"></i>
@@ -812,18 +815,14 @@
 
                 <!-- Description -->
                 <div class="form-group">
-                    <label for="{{ form.description.id_for_label }}" class="required">
+                    <label for="{{ form.description.id_for_label }}">
                         <i class="fas fa-info-circle"></i>
                         Description & Condition
                     </label>
-                    <textarea 
-                        id="{{ form.description.id_for_label }}"
-                        name="{{ form.description.name }}"
+                    <textarea id="{{ form.description.id_for_label }}" name="{{ form.description.name }}"
                         class="form-control"
                         placeholder="Describe the person's appearance, clothing, physical condition, any belongings, and circumstances of being found"
-                        rows="5"
-                        required
-                    >{{ form.description.value|default:'' }}</textarea>
+                        rows="5">{{ form.description.value|default:'' }}</textarea>
                     {% if form.description.errors %}
                     <div class="error-message">
                         <i class="fas fa-exclamation-circle"></i>
@@ -854,51 +853,47 @@
                             </div>
                             <div class="upload-text">
                                 <h4>Upload a clear photo of the found person</h4>
-                                <p>Help families identify their loved ones with a clear, recent photo (max 5MB, JPG, PNG, or JPEG)</p>
+                                <p>Help families identify their loved ones with a clear, recent photo (max 5MB, JPG,
+                                    PNG, or JPEG)</p>
                                 <div class="upload-button">
                                     <i class="fas fa-plus"></i>
                                     Choose Photo
                                 </div>
                             </div>
                         </label>
-                        <div class="file-preview" id="filePreview" style="margin-top: 1rem; display: none; justify-content: center; align-items: center;"></div>
+                        <div class="file-preview" id="filePreview"
+                            style="margin-top: 1rem; display: none; justify-content: center; align-items: center;">
+                        </div>
                         <style>
-                        #filePreview img {
-                            display: block;
-                            margin-left: auto;
-                            margin-right: auto;
-                        }
+                            #filePreview img {
+                                display: block;
+                                margin-left: auto;
+                                margin-right: auto;
+                            }
                         </style>
                         <script>
-                        document.addEventListener('DOMContentLoaded', function() {
-                            const fileInput = document.getElementById('{{ form.photo.id_for_label }}');
-                            const filePreview = document.getElementById('filePreview');
-                            fileInput.addEventListener('change', function() {
-                                filePreview.innerHTML = '';
-                                if (this.files && this.files[0]) {
-                                    const file = this.files[0];
-                                    if (!file.type.match('image.*')) return;
-                                    const reader = new FileReader();
-                                    reader.onload = function(e) {
-                                        filePreview.innerHTML = `<img src="${e.target.result}" alt="Photo preview" style="max-width:200px;max-height:200px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">`;
-                                        filePreview.style.display = 'block';
-                                    };
-                                    reader.readAsDataURL(file);
-                                } else {
-                                    filePreview.style.display = 'none';
-                                }
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const fileInput = document.getElementById('{{ form.photo.id_for_label }}');
+                                const filePreview = document.getElementById('filePreview');
+                                fileInput.addEventListener('change', function () {
+                                    filePreview.innerHTML = '';
+                                    if (this.files && this.files[0]) {
+                                        const file = this.files[0];
+                                        if (!file.type.match('image.*')) return;
+                                        const reader = new FileReader();
+                                        reader.onload = function (e) {
+                                            filePreview.innerHTML = `<img src="${e.target.result}" alt="Photo preview" style="max-width:200px;max-height:200px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">`;
+                                            filePreview.style.display = 'block';
+                                        };
+                                        reader.readAsDataURL(file);
+                                    } else {
+                                        filePreview.style.display = 'none';
+                                    }
+                                });
                             });
-                        });
                         </script>
-                            <input 
-                                type="file" 
-                                id="{{ form.photo.id_for_label }}"
-                                name="{{ form.photo.name }}"
-                                class="file-input"
-                                accept="image/*"
-                                required
-                            >
-                        </label>
+                        <input type="file" id="{{ form.photo.id_for_label }}" name="{{ form.photo.name }}"
+                            class="file-input" accept="image/*" required>
                         <div class="file-preview" id="filePreview">
                             <!-- Single photo preview will be shown here -->
                         </div>
@@ -934,20 +929,20 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('reportForm');
         const dropArea = document.getElementById('dropArea');
         const fileInput = document.getElementById('{{ form.photo.id_for_label }}');
         const filePreview = document.getElementById('filePreview');
         const formProgress = document.getElementById('formProgress');
         const progressFill = document.getElementById('progressFill');
-        
+
         // Age Estimation Elements
         const ageSlider = document.getElementById('age_estimate_slider');
         const ageDisplay = document.getElementById('ageDisplay');
         const ageEstimateInput = document.getElementById('{{ form.age_estimate.id_for_label }}');
         const agePresets = document.querySelectorAll('.age-preset');
-        
+
         // Initialize age estimation
         function initializeAgeEstimation() {
             // Set initial value from form if exists
@@ -960,7 +955,7 @@
                     ageSlider.value = Math.min(Math.max(age, 0), 100);
                     ageDisplay.textContent = age <= 100 ? `${age} years` : '100+ years';
                     ageDisplay.classList.add('estimated');
-                    
+
                     // Set preset if applicable
                     setPresetForAge(age);
                 }
@@ -969,7 +964,7 @@
                 ageEstimateInput.value = '';
                 ageDisplay.textContent = 'Unknown';
                 ageDisplay.classList.remove('estimated');
-                
+
                 // Set "Unknown" preset as active
                 agePresets.forEach(preset => {
                     preset.classList.remove('active');
@@ -978,9 +973,9 @@
                     }
                 });
             }
-            
+
             // Update age display on slider change
-            ageSlider.addEventListener('input', function() {
+            ageSlider.addEventListener('input', function () {
                 const age = parseInt(this.value);
                 if (age === 0) {
                     ageDisplay.textContent = 'Unknown';
@@ -994,21 +989,21 @@
                     ageDisplay.textContent = '100+ years';
                     ageDisplay.classList.add('estimated');
                     ageEstimateInput.value = 100;
-            });
-            
+                });
+
             // Handle preset clicks
             agePresets.forEach(preset => {
-                preset.addEventListener('click', function() {
+                preset.addEventListener('click', function () {
                     const ageType = this.dataset.age;
-                    
+
                     // Remove active class from all presets
                     agePresets.forEach(p => p.classList.remove('active'));
-                    
+
                     // Add active class to clicked preset
                     this.classList.add('active');
-                    
+
                     // Set values based on preset
-                    switch(ageType) {
+                    switch (ageType) {
                         case 'unknown':
                             ageSlider.value = 0;
                             ageDisplay.textContent = 'Unknown';
@@ -1046,16 +1041,16 @@
                             ageEstimateInput.value = 70;
                             break;
                     }
-                    
+
                     updateFormProgress();
                 });
             });
         }
-        
+
         function setPresetForAge(age) {
             // Remove active class from all presets
             agePresets.forEach(p => p.classList.remove('active'));
-            
+
             // Determine which preset to activate
             let targetPreset = 'unknown';
             if (age > 0 && age <= 12) targetPreset = 'child';
@@ -1063,7 +1058,7 @@
             else if (age >= 20 && age <= 35) targetPreset = 'young';
             else if (age >= 36 && age <= 60) targetPreset = 'middle';
             else if (age > 60) targetPreset = 'senior';
-            
+
             // Activate the appropriate preset
             agePresets.forEach(preset => {
                 if (preset.dataset.age === targetPreset) {
@@ -1071,118 +1066,118 @@
                 }
             });
         }
-        
+
         // Initialize form controls
         const formControls = form.querySelectorAll('.form-control, .file-input, textarea');
         formControls.forEach(control => {
             // Add focus/blur effects
-            control.addEventListener('focus', function() {
+            control.addEventListener('focus', function () {
                 this.parentElement.parentElement.classList.add('focused');
             });
-            
-            control.addEventListener('blur', function() {
+
+            control.addEventListener('blur', function () {
                 this.parentElement.parentElement.classList.remove('focused');
                 validateField(this);
             });
-            
+
             // Real-time validation for required fields
             if (control.hasAttribute('required')) {
-                control.addEventListener('input', function() {
+                control.addEventListener('input', function () {
                     validateField(this);
                     updateFormProgress();
                 });
             }
-            
+
             // Set initial values if they exist (from form errors)
             if (control.value) {
                 validateField(control);
                 updateFormProgress();
             }
         });
-        
+
         // Initialize age estimation
         initializeAgeEstimation();
-        
+
         // File Upload Functionality
         if (dropArea && fileInput) {
             // Click to upload
-            dropArea.addEventListener('click', function(e) {
+            dropArea.addEventListener('click', function (e) {
                 if (e.target.closest('.upload-button') || e.target === dropArea) {
                     fileInput.click();
                 }
             });
-            
+
             // Drag and drop
             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
                 dropArea.addEventListener(eventName, preventDefaults, false);
             });
-            
+
             function preventDefaults(e) {
                 e.preventDefault();
                 e.stopPropagation();
             }
-            
+
             ['dragenter', 'dragover'].forEach(eventName => {
                 dropArea.addEventListener(eventName, highlight, false);
             });
-            
+
             ['dragleave', 'drop'].forEach(eventName => {
                 dropArea.addEventListener(eventName, unhighlight, false);
             });
-            
+
             function highlight() {
                 dropArea.classList.add('dragover');
             }
-            
+
             function unhighlight() {
                 dropArea.classList.remove('dragover');
             }
-            
+
             // Handle dropped files
             dropArea.addEventListener('drop', handleDrop, false);
-            
+
             function handleDrop(e) {
                 const dt = e.dataTransfer;
                 const files = dt.files;
                 handleFiles(files);
             }
-            
+
             // Handle file input change
-            fileInput.addEventListener('change', function() {
+            fileInput.addEventListener('change', function () {
                 handleFiles(this.files);
             });
-            
+
             // Check if there's already a file (from form errors)
             if (fileInput.files.length > 0) {
                 handleFiles(fileInput.files);
             }
         }
-        
+
         function handleFiles(files) {
             if (!files.length) return;
-            
+
             // Clear existing preview
             filePreview.innerHTML = '';
-            
+
             // Take only the first file (single photo upload)
             const file = files[0];
-            
+
             // Validate file
             if (file.size > 5 * 1024 * 1024) {
                 showError('File size should be less than 5MB');
                 fileInput.value = '';
                 return;
             }
-            
+
             if (!file.type.match('image.*')) {
                 showError('Please upload only image files (JPG, PNG, JPEG)');
                 fileInput.value = '';
                 return;
             }
-            
+
             // Create preview
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 const previewItem = document.createElement('div');
                 previewItem.className = 'preview-item';
                 previewItem.innerHTML = `
@@ -1192,33 +1187,33 @@
                     </button>
                 `;
                 filePreview.appendChild(previewItem);
-                
+
                 // Add remove functionality
                 const removeBtn = previewItem.querySelector('.remove-file');
-                removeBtn.addEventListener('click', function() {
+                removeBtn.addEventListener('click', function () {
                     fileInput.value = '';
                     filePreview.classList.remove('active');
                     updateFormProgress();
                 });
             };
             reader.readAsDataURL(file);
-            
+
             // Show preview container
             filePreview.classList.add('active');
-            
+
             // Update form progress
             updateFormProgress();
         }
-        
+
         // Form validation
         function validateField(field) {
             const formGroup = field.closest('.form-group');
             const errorDiv = formGroup ? formGroup.querySelector('.error-message.user') : null;
-            
+
             if (field.hasAttribute('required')) {
                 let isValid = true;
                 let errorMessage = '';
-                
+
                 if (field.type === 'file') {
                     isValid = field.files.length > 0;
                     errorMessage = 'Please upload a photo';
@@ -1230,7 +1225,7 @@
                     isValid = field.value.trim() !== '';
                     errorMessage = 'This field is required';
                 }
-                
+
                 if (!isValid) {
                     if (formGroup) {
                         const formControl = formGroup.querySelector('.form-control:not([type="hidden"])');
@@ -1256,13 +1251,13 @@
             }
             return true;
         }
-        
+
         function updateFormProgress() {
             if (!formProgress || !progressFill) return;
-            
+
             const requiredFields = form.querySelectorAll('[required]');
             let filledCount = 0;
-            
+
             requiredFields.forEach(field => {
                 if (field.type === 'file') {
                     if (field.files.length > 0) filledCount++;
@@ -1273,10 +1268,10 @@
                     if (field.value.trim() !== '') filledCount++;
                 }
             });
-            
+
             const progress = (filledCount / requiredFields.length) * 100;
             progressFill.style.width = `${progress}%`;
-            
+
             // Show progress bar if progress > 0
             if (progress > 0) {
                 formProgress.style.display = 'block';
@@ -1284,13 +1279,13 @@
                 formProgress.style.display = 'none';
             }
         }
-        
+
         // Form submission
         if (form) {
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', function (e) {
                 let isValid = true;
                 let firstErrorField = null;
-                
+
                 // Validate all required fields
                 const requiredFields = form.querySelectorAll('[required]');
                 requiredFields.forEach(field => {
@@ -1301,17 +1296,17 @@
                         }
                     }
                 });
-                
+
                 if (!isValid) {
                     e.preventDefault();
                     showError('Please fill all required fields correctly');
-                    
+
                     // Scroll to first error
                     if (firstErrorField) {
                         firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         firstErrorField.focus();
                     }
-                    
+
                     // Shake effect for error
                     form.classList.add('shake');
                     setTimeout(() => {
@@ -1323,7 +1318,7 @@
                     const originalText = submitBtn.innerHTML;
                     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
                     submitBtn.disabled = true;
-                    
+
                     // Re-enable after 5 seconds if submission fails
                     setTimeout(() => {
                         submitBtn.innerHTML = originalText;
@@ -1332,12 +1327,12 @@
                 }
             });
         }
-        
+
         function showError(message) {
             // Remove existing error alerts
             const existingAlerts = document.querySelectorAll('.form-alert.error');
             existingAlerts.forEach(alert => alert.remove());
-            
+
             // Create new error alert
             const errorAlert = document.createElement('div');
             errorAlert.className = 'form-alert error';
@@ -1345,18 +1340,18 @@
                 <i class="fas fa-exclamation-circle"></i>
                 <div>${message}</div>
             `;
-            
+
             // Insert after header
             const header = document.querySelector('.form-header');
             header.parentNode.insertBefore(errorAlert, header.nextSibling);
-            
+
             // Scroll to error
             errorAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-        
+
         // Initialize progress
         updateFormProgress();
-        
+
         // Shake animation
         const style = document.createElement('style');
         style.textContent = `
