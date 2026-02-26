@@ -1,6 +1,5 @@
 def navbar_context(request):
     app_pages = {
-        "dashboard",
         "report_missing",
         "report_found",
         "view_found",

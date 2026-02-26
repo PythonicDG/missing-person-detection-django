@@ -572,17 +572,17 @@
                 </div>
                 <div class="welcome-stats">
                     <div class="stat-item">
-                        <span class="stat-value">{{ missing_reports_count }}</span>
+                        <span class="stat-value" id="activeReports">{{ missing_reports_count }}</span>
                         <span class="stat-label">Missing Reports</span>
                     </div>
 
                     <div class="stat-item">
-                        <span class="stat-value">{{ found_reports_count }}</span>
+                        <span class="stat-value" id="matchesFound">{{ found_reports_count }}</span>
                         <span class="stat-label">Found Reports</span>
                     </div>
 
                     <div class="stat-item">
-                        <span class="stat-value">{{ total_reunited }}</span>
+                        <span class="stat-value" id="reunitedCount">{{ total_reunited }}</span>
                         <span class="stat-label">Reunited</span>
                     </div>
 
@@ -755,9 +755,9 @@
     document.addEventListener('DOMContentLoaded', function () {
         // Animate stat counters
         const statValues = {
-            activeReports: 3,
-            matchesFound: 2,
-            reunitedCount: 1,
+            activeReports: parseInt(document.getElementById('activeReports').textContent) || 0,
+            matchesFound: parseInt(document.getElementById('matchesFound').textContent) || 0,
+            reunitedCount: parseInt(document.getElementById('reunitedCount').textContent) || 0,
             responseTime: 24,
             successRate: 98,
             activeVolunteers: 150,

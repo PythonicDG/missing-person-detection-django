@@ -340,6 +340,11 @@ def open_chat(request, user_id):
             if mode == 'missing_to_found':
                 source_obj = MissingPerson.objects.get(id=source_id)
                 match_obj = FoundPerson.objects.get(id=match_id)
+                
+                # Update status to closed to increase reunited count as requested by user
+                source_obj.status = 'closed'
+                source_obj.save()
+                
                 location = match_obj.found_location
                 person_name = source_obj.name
                 photo = match_obj.photo
@@ -347,6 +352,11 @@ def open_chat(request, user_id):
             else:
                 source_obj = FoundPerson.objects.get(id=source_id)
                 match_obj = MissingPerson.objects.get(id=match_id)
+                
+                # Update status to closed to increase reunited count as requested by user
+                match_obj.status = 'closed'
+                match_obj.save()
+                
                 location = source_obj.found_location
                 person_name = match_obj.name
                 photo = source_obj.photo
