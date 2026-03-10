@@ -1,9 +1,22 @@
-# Tell GitHub Linguist to ignore template and static files for language stats
-accounts/templates/* linguist-vendored
-accounts/static/* linguist-vendored
-pages/templates/* linguist-vendored
-pages/static/* linguist-vendored
-core/templates/* linguist-vendored
-core/static/* linguist-vendored
-media/* linguist-vendored
-missing_photos/* linguist-vendored
+# Force GitHub Linguist to treat this as a Python project
+# Mark all HTML templates as linguist-vendored (excluded from language stats)
+*.html linguist-vendored
+*.css linguist-vendored
+*.js linguist-vendored
+
+# Mark template and static directories as vendored
+accounts/templates/** linguist-vendored
+accounts/static/** linguist-vendored
+pages/templates/** linguist-vendored
+pages/static/** linguist-vendored
+core/templates/** linguist-vendored
+core/static/** linguist-vendored
+media/** linguist-vendored
+missing_photos/** linguist-vendored
+
+# Mark any virtual environment files that might slip through
+env/** linguist-vendored
+venv/** linguist-vendored
+
+# Explicitly mark Python as the project language
+*.py linguist-detectable
